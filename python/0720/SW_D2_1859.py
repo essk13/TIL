@@ -26,26 +26,40 @@ price = list(map(int, input().split()))
 day = len(price)
 price_max = 0
 price_idex = 0
+re_index = 1
 expense = 0
 sales = 0
 items = 0
 gain = 0
 
-for n in range(1, day):
-    if price[n - 1] > price_max:
-        price_max = price[n - 1]
+for i in range(day):
+    if day == re_index + 1:
+        break
 
-for m in range(day):
-    if price[m] == price_max:
-        price_idex = m
+    for n in range(re_index, day + 1):
+        if price[n - 1] > price_max:
+            price_max = price[n - 1]
+            price_idex = n - 1
 
-for d in range(price_idex):
-    if price[d - 1] <= price[d]:
-        expense += price[d - 1]
-        items += 1
-        if price[d - 1] < price[d]:
-            sales = price[d]
-            gain += (sales * items - expense)
-            sales = 0
-            expense = 0
-            items = 0
+    # for x in range(day):
+    #     if price[x] == price_max:
+            # price_idex = x
+
+    for d in range(re_index, price_idex + 1):
+        if price[d - 1] < price[price_idex]:
+            expense += price[d - 1]
+            items += 1
+            if price[d] == price[price_idex]:
+                sales = price[d]
+                gain += (sales * items - expense)
+                sales = 0
+                expense = 0
+                items = 0
+            print(gain)
+
+    # for m in range(day):
+    #     if price[m] == price_max:
+    re_index = price_idex + 1
+    price_idex = 0
+
+print(gain)
