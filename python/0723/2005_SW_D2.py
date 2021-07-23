@@ -16,14 +16,22 @@
 # 삼각형 각 줄의 처음 숫자가 나오기 전까지의 빈 칸은 생략하고 숫자들 사이에는 한 칸의 빈칸을 출력한다.
 # (t는 테스트 케이스의 번호를 의미하며 1부터 시작한다.)
 
-number = int(input())
-ret_pascal = [[1]]
-for num in range(1, number):
-    row = [1]
-    for i in range(len(ret_pascal[-1])-1):
-        n = ret_pascal[-1][i] + ret_pascal[-1][i+1]
-        
-    row.append(1)
-    ret_pascal.append(row)
+def pascal_tri():
+    number = int(input())
+    ret_pascal = [[1]]
+    for num in range(1, number):
+        row = [1]
+        for i in range(len(ret_pascal[-1])-1):
+            n = ret_pascal[-1][i] + ret_pascal[-1][i+1]
+            row.append(n)
+        row.append(1)
+        ret_pascal.append(row)
 
-print(ret_pascal)
+    for idx in range(number):
+        print(*(ret_pascal[idx]))
+
+case_num = int(input())
+
+for cnt in range(case_num):
+    print(f'#{cnt+1}')
+    pascal_tri()
