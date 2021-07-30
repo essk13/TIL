@@ -1,4 +1,8 @@
 def ladder():
+    '''
+    사다리 타기 게임 중 당첨에 도달하는
+    출발 지점 계산 함수
+    '''
     case = int(input())
     ladder = []
 
