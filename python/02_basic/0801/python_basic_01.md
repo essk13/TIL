@@ -63,7 +63,7 @@
      | x **not in** s |  containment test   |
      |  s1 **+** s2   |    concatenation    |
      |   s ***** n    | n번 반복하여 더하기 |
-     |    s**[i]**    |      indexting      |
+     |    s**[i]**    |      indexing       |
      |   s**[i:j]**   |       slicing       |
      |   **len( )**   |        길이         |
      |   **min( )**   |       최솟값        |
@@ -95,7 +95,7 @@
      ```markdown
      i) 생성
      	{}(중괄호) 또는 dict() 함수를 사용해 생성
-     	※ key = immuyable(변경 불가능) 데이터만 가능
+     	※ key = immutable(변경 불가능) 데이터만 가능
      	   value = list, dictionary 등 모두 가능
      ```
 
@@ -310,6 +310,8 @@
 
        \- 함수를 정의할 때, 기본값을 지정하여 정의된 것 보다 적은 개수의 인자들로 호출 가능
 
+        **※ 기본 인자 다음에 기본 값이 없는 인자를 사용할 수 없다 ※**
+   
        ```python
        def <function>(Pargs, DargsV = 1)
        ```
@@ -317,7 +319,7 @@
      - **키워드 인자(Keyword Arguments)**
 
        \- 함수 호출 시 키워드 인자를 활용하여 직접 변수의 이름으로 특정 인자 전달 가능
-
+   
        ```python
        def <function>(name, age):
        	pass
@@ -331,7 +333,7 @@
      - **가변인자 리스트 (*args)**
 
        \- 개수가 정해지지 않은 임의의 인자를 받기 위해서 함수를 정의할 때 가변인자 리스트 *args를 활용
-
+   
        ```python
        def <function>(args, *args):
        	pass
@@ -343,7 +345,7 @@
        \- 정해지지 않은 키워드 인자들을 받기 위해서 함수를 정의할 때 가변 키워드 인자 \**kwargs를 활용
 
        \- 가변 키워드 인자는 dict 형태로 처리
-
+   
        ```python
        def <function>(**kwargs):
        	pass
@@ -419,7 +421,7 @@
      - **EOL (End of Line)**
 
        ```python
-       print('hello'
+       print('hello)
        ```
 
      - **EOF (End of File)**
@@ -606,8 +608,8 @@
      	.index(x) / Value Error
      2) 문자열 변경
      	.replace(old, new[, count])
-     	.striop([chars])
-     	.split([chars]) / .rstrip() / .lstrip()
+     	.strip([chars]) / .rstrip() / .lstrip()
+     	.split([chars])
      	'separator'.join(iterable)
      	.capitalize() / .title() / .upper() / .lower() / .swapcase()
      3) 참/거짓 반환
@@ -647,7 +649,7 @@
      	i) copy module 활용 / b = copy.deepcopy(a)
      ```
 
-   - **List Comperhenshion**
+   - **List Comprehenshion**
 
      ```python
      x = [<expression> for <variable> in <iterable>]
