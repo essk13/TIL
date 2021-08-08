@@ -625,10 +625,10 @@
      ```markdown
      1) 값 추가 및 삭제
      	.append(x)
-     	.extend(iterable)
+     	.extend(iterable) / TypeError
      	.insert(idx, x)
-     	.remove(x)
-     	.pop(idx)
+     	.remove(x) / ValueError
+     	.pop(idx) / IndexError
      	.clear()
      2) 탐색 및 정렬
      	.index(x) / ValueError
@@ -685,7 +685,7 @@
      	.update(*iteralbe)
      	.remove(x) / KeyError
      	.discard(x)
-     	.pop()
+     	.pop() / KeyError
      ```
 
 2. **딕셔너리(Dictionary)**
@@ -799,7 +799,10 @@
    - **명령형 프로그래밍**
 
      - **절차지향 프로그래밍** : 데이터와 함수
+
      - **객체지향 프로그래밍** : 데이터와 메서드 분리, 추상화된 구조(인터페이스)
+
+         **\- 직관성 / 용이성 / 유연성**
 
    - **클래스와 인스턴스**
 
