@@ -1,8 +1,5 @@
 # Naver_Developers_api
 
-# cl_id = 4BbIJU1ayUAqbQmg5qDR
-# cl_pw = 3Mo2G9JlXG
-
 import requests
 from pprint import pprint
 
@@ -11,8 +8,8 @@ sort = 'asc'                  #input('정렬 옵션 (date, asc<오름차순>, ds
 url =f'https://openapi.naver.com/v1/search/shop.json?query={query}&sort={sort}'
 
 head = {
-    'X-Naver-Client-Id': '4BbIJU1ayUAqbQmg5qDR',
-    'X-Naver-Client-Secret': '3Mo2G9JlXG'
+    'X-Naver-Client-Id': ,
+    'X-Naver-Client-Secret': 
 }
 
 response = requests.get(url, headers = head).json()
