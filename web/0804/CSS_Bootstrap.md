@@ -63,6 +63,8 @@
      ```
 
        \- 선택한 요소의 마지막 자식으로 가상 요소를 생성 (기본값 = inline)
+     
+       \- 보통 content 속성과 함께 사용 / 장식용 콘텐츠를 추가할 때 사용
 
 4. **Flexbox**
 
@@ -113,19 +115,20 @@
 
      - **교차축 방향 정렬 (align)**
 
-         **\- align-items**
+       **\- align-items**
 
        ```1
        flex-start, end / center
-       stretch
+       stretch = 컨테이너를 가득 채움(default)
        baseline
        ```
 
          **\- align-self**
 
        ```
+       auto (default)
        flex-start, end / center
-       stretch
+       stretch = 부모 컨테이너에 자동으로 맞춰서 늘어남
        space-between
        space-around
        ```
@@ -135,23 +138,100 @@
        ```
        auto
        flex-start, end / center
-       stretch
+       stretch = 컨테이너를 가득 채움(default)
        baseline
        ```
 
+         \- content = 여러 줄
+
+         \- items = 한 줄
+
+         \- self = 개별 요소
+
      - 기타
 
-         **\- flex-wrap**
+         **\- flex-wrap** : 허용량을 벗어나면 강제로 한 줄 배치할지 또는 줄을 바꿔 배치할지 결정
 
-         **\- flex-flow**
+          					   \- nowrap(default)
 
-         **\- flex-grow**
+          					   \- wrap
 
-         **\- order**
+          					   \- wrap-reverse : 넘치면 윗줄로
+         
+         **\- flex-flow** : flex-direction과 flex wrap을 한 번에 설정하는 shorthand
+         
+         **\- flex-grow** : 주축에서 남은 공간을 항목에게 분배
+         
+         **\- order** : 항목이 나타날 순서 지정(1 = default)
 
-   - 
-
-5. **Grid system**
 
 ## II. Bootstrap
+
+1. **CSS library**
+
+   - **spacing**
+
+       \- html 텍스트 기본 사이즈는 16px
+
+     
+
+   - **color**
+
+     
+
+   - **Text**
+
+       \- text-start, center, end
+
+       \- text-decoration-none
+
+       \- fw-bold, normal, light
+
+       \- fst-italic
+
+   - **Components**
+
+       \- Bootstrap에서 제공하는 컨텐츠
+
+   - **Flexbox in Bootstrap**
+
+       \- d-flex
+
+       \- justify-content-center
+
+       \- align-items-center
+
+   - **Responsive Web**
+
+       \- 반응형 웹 (디바이스의 viewport에 따라 보이는 화면이 다르게 구성)
+
+       \- 웹에 대한 접근 방식
+
+2. **Grid System**
+
+   - flexbox로 제작
+
+   - **container, rows, column**으로 컨텐츠 배치 및 정렬
+
+   - **12개 column / 6개 grid breakpoints**
+
+   - **row**
+
+       \- column의 wrapper
+
+   - **column**
+
+       \- content는 column에 존재
+
+       \- row의 자식 == column
+
+   - **breakpoints**
+
+       \- 뷰포트 크기에서 반응형 레이아웃이 작동하는 방식을 결정하는 사용자 지정 가능한 너비
+
+   - **offset**
+
+       \- 지정한 만큼의 column 공백 설정
+
+   - **nesting** (중첩)
 
