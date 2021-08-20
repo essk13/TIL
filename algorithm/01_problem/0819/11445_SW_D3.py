@@ -1,3 +1,6 @@
+'''
+무한사전
+'''
 T = int(input())
 for tc in range(T):
     P = input().rstrip()

@@ -1,4 +1,11 @@
+'''
+틱택톰
+'''
+
 def row(c):
+    '''
+    가로 확인
+    '''
     ret = 0
     for y in range(4):
         for x in range(4):
@@ -11,6 +18,9 @@ def row(c):
 
 
 def column(c):
+    '''
+    세로 확인
+    '''
     ret = 0
     for x in range(4):
         for y in range(4):
@@ -23,6 +33,9 @@ def column(c):
 
 
 def ltor(c):
+    '''
+    우하 대각선 확인 
+    '''
     ret = 0
     x = y = 0
     while x < 4:
@@ -37,6 +50,9 @@ def ltor(c):
 
 
 def rtol(c):
+    '''
+    우상 대각선 확인 
+    '''
     ret = 0
     x = 3
     y = 0
