@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;height: 100px;
+      background-color: green;
+      position: relative; /* 또는 absolute; */
+      -webkit-animation: myani 5s infinite; /* webkit 기반 브라우저 전용(Chrome) */
+      animation: myani 5s infinite;
+    }
+    @keyframes myani {
+      0% {left: 0px;}
+      25% {left: 200px;}
+      75% {left: 50px;}
+      100% {left: 100px;}
+    }
+    @-webkit-keyframes myani{
+      0% {left: 0px;}
+      25% {left: 200px;}
+      75% {left: 50px;}
+      100% {left: 100px;}
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+</html>

@@ -701,7 +701,7 @@
      	.get(key[, default]) / default = None
      2) 추가 및 삭제
      	.pop(key[, default]) / default 미설정 = KeyError
-     	.update()
+     	.update({key:value})
      3) 기타(순회)
      	.keys()
      	.values()
