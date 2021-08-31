@@ -300,7 +300,7 @@ templates 폴더 위치, 폴더명 확인 필수
 - 웹에서 사용자 정보를 입력하는 방식을 제공 / 데이터를 서버로 전송하는 역할
 - 핵심 속성
   - **action** : 입력된 데이터를 원하는 서버로 전송하기 위해 전송할 주소를 작성
-  - **method** : 데이터 전송 방법 / defualt = "get"
+  - **method** : 데이터 전송 방법 / default = "get"
   - **name** : 입력된 데이터의 호출명
 - **request method - "get" / "post"**
   - 데이터를 서버로 전송 시 body가 아닌 **Query String Parameters(?key=value)**를 통해 전송
@@ -326,5 +326,5 @@ templates 폴더 위치, 폴더명 확인 필수
 
   ​		**※ 기존 경로 주소를 찾아가지 못 할 수 있음 => 중복되지 않도록 순서를 변경하거나 구분 가능한 pattern을 추가하여 작성**
 
-- 변수 저장 defualt = str
+- 변수 저장 default = str
   - 지정 방법 : \<str:변수명> / \<int:변수명>
