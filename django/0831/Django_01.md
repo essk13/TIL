@@ -326,5 +326,61 @@ templates 폴더 위치, 폴더명 확인 필수
 
   ​		**※ 기존 경로 주소를 찾아가지 못 할 수 있음 => 중복되지 않도록 순서를 변경하거나 구분 가능한 pattern을 추가하여 작성**
 
+#### URL Path converters
+
 - 변수 저장 default = str
-  - 지정 방법 : \<str:변수명> / \<int:변수명>
+  - 지정 방법 : \<str:변수명> / \<int:변수명>/\<slug:변수명>
+  - str = 문자열 / int = 0 또는 양의 정수 / slug = ASCII문자 또는 숫자, '-', '_' 로 구성된 모든 슬러그 문자열
+
+### APP URL Mapping
+
+- URL을 분리하여 각 app에 urls.py를 작성
+
+- view함수의 중첩을 줄이고 유지, 보수가 쉬움
+
+  **① 설정 폴더 / urls.py**
+
+  ​		\- include() 함수 호출 및 APP.urls path 등록
+
+  ```python
+  from django.urls import path, include
+  
+  urlpatterns = [
+  	path('articles/', include('articles.urls'))
+  ]
+  ```
+
+  **② APP 폴더 / urls.py**
+
+  ​		\- 각 APP 폴더 내부에 urls.py 파일 생성
+
+  ​		\- path()함수 및 views 모듈 호출
+
+  ​		\- app_name 작성 및 urlpatterns 리스트 생성
+
+  ​		\- path 마지막 인자로 path 명 지정
+
+  ```python
+  from django.urls import path
+  from . import views
+  
+  app_name = 'articles'
+  urlpatterns = [
+  	path('index/', views.index, name='index'),
+  	...
+  ]
+  ```
+
+  **③ Templates_namespace**
+
+  ​		\- templates / App 명 폴더 / html 파일 구조로 폴더 생성
+
+  ​		\- views.py 에서 return 경로 작성 시 'App명/__.html'로 작성
+
+  ```python
+  def index(request):
+  	return render(request, 'articles/index.html')
+  ```
+
+  
+
