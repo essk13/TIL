@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <header>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://extmovie.com/files/attach/images/135/895/559/040/8c7733d1326b14a9714acc599370c46c.jpg" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </header>
+  <div style="my-3">
+    <h1 class="fw-bold mt-3">MOVIES</h1>  <hr>
+    {% for movie in movies %}
+      <div class="col-3 card mb-3" style="width: 18rem;">
+        <img src="{{movie.poster_path}}" class="card-img-top" alt="Movie_poster">
+        <div class="card-body">
+          <a href="{% url 'movies:detail' movie.pk %}" class="text-decoration-none"><h3 class="card-text fw-bold text-black">{{ movie.title }}</h3></a>
+        </div>
+      </div>
+      {% comment %} <a href="{% url 'movies:detail' movie.pk %}" class="text-decoration-none text-dark">
+        <h2 class="fw-bold">{{ movie.title }}</h2>
+      </a> {% endcomment %}
+    {% empty %}
+      <h2>등록된 영화가 없습니다.</h2>
+    {% endfor %}
+  </div>
+{% endblock content %}

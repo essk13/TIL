@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form action="{% url 'movies:update' movie.pk %}" method="POST">
+    {% csrf_token %}
+    <div class="input-group my-3">
+      <span class="input-group-text" id="inputGroup-sizing-default">TITLE</span>
+      <input type="text" name="title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{movie.title}}">
+    </div>
+    <div class="form-floating">
+      <textarea class="form-control" placeholder="Leave a comment here" name="overview" id="floatingTextarea2" style="height: 100px">{{movie.overview}}</textarea>
+      <label for="floatingTextarea2 opacity-50">Overview</label>
+    </div>
+    <div class="row justify-content-between align-items-center">
+      <div class="input-group my-3 col">
+        <span class="input-group-text" id="inputGroup-sizing-default">POSTER</span>
+        <input type="text" name="poster_path" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="{{movie.poster_path}}">
+      </div>
+      <div class="col-4">
+        <button class="btn btn-secondary py-0">WRITE</button>
+        <a href="{% url 'movies:index' %}" class="btn btn-outline-dark py-0">BACK</a>
+      </div>
+    </div>
+  </form>
+{% endblock content %}
