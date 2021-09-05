@@ -1,9 +1,9 @@
 # Django_01
 
-## 1. Python web farmework
+## 1. Python web framework
 
 - Django, Flask, FastAPI etc...
-- ex) 개인 창업(HTML, CSS) vs 프랜차이즈(Framwork)
+- ex) 개인 창업(HTML, CSS) vs 프랜차이즈(Framework)
 - 프로그래밍에서 특정 운영 체제를 위한 응용 프로그램 표준 구조를 구현하는 클래스와 라이브러리 모임
 - 재사용 가능한 코드를 프레임워크로 통합함으로써 표준 코드 재작성 방지
 
