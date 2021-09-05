@@ -396,7 +396,7 @@ urlpatterns = [
 ]
 ```
 
-#### ⑨ Sceleton Template 생성 및 BASE_DIR 등록
+#### ⑨ Skeleton Template 생성 및 BASE_DIR 등록
 
 ```django
 {# PJT Directory / templates/ base.html #}
