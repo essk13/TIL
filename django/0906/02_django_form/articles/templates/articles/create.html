@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>CREATE</h1>
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button class="btn btn-secondary py-0">WRITE</button>
+    <a href="{% url 'articles:index' %}" class="text-decoration-none btn btn-outline-dark py-0">
+    BACK</a>
+  </form>
+  <hr>
+{% endblock  %}

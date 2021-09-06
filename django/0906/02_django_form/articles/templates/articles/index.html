@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>INDEX</h1>
+  <a href="{% url 'articles:create' %}" class="text-decortaion-none btn btn-outline-secondary py-0">
+  NEW</a>
+  <hr>
+  {% for article in articles %}
+    <p>글 번호 : {{ article.pk }}</p>
+    <p>글 제목 : {{ article.title }}</p>
+    <a href="{% url 'articles:detail' article.pk %}" class="text-decortaion-none btn btn-outline-secondary py-0">
+    DETAIL</a>
+    <hr>
+  {% endfor %}
+{% endblock %}

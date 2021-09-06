@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h2>DETAIL</h2>
+  <h3>{{ article.pk }} 번째 글</h3>
+  <hr>
+  <p>제목 : {{ article.title }}</p>
+  <p>내용 : {{ article.content }}</p>
+  <p>작성시각 : {{ article.created_at }}</p>
+  <p>수정시각 : {{ article.updated_at }}</p>
+  <hr>
+  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <a href="{% url 'articles:update' article.pk %}" class="text-decoration-none btn btn-secondary py-0">
+    UPDATE</a>
+    <button class="btn btn-secondary py-0">DELETE</button>
+    <a href="{% url 'articles:index' %}" class="text-decoration-none btn btn-outline-dark py-0">
+    BACK</a>
+  </form>
+{% endblock %}
