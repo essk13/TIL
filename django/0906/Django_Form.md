@@ -180,8 +180,18 @@
 - **Form**
 
   - 어떤 model에 저장해야하는지 알 수 없음
+
   - 유효성 검사 후 cleaned_data 딕셔너리 생성
-  - **cleaned_data 딕셔너리에서 데이터를 가져온 후  `.save()` 호출**
+
+  - **cleaned_data 딕셔너리에서 데이터를 가져온 후  `.save()` 호출 (Model에 저장)**
+
+    ```python
+    if form.is_valid():
+        attrs1 = form.cleaned_data.get('attribute1')
+        attrs2 = form.cleaned_data.get('attribute2')
+        model_name = Model_name.objects.create(attribute1=attrs1, attriubte2=attrs2) # .save()사용 가능
+    ```
+
   - **model에 연관되지 않은 데이터를 받을 때 사용**
 
 - **ModelForm**

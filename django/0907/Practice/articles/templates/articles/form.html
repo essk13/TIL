@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  {% if btn_name == 'EDIT' %}
+    <h1>UPDATE</h1>
+  {% else %}
+    <h1>CREATE</h1>
+  {% endif %}
+  <hr>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button class="btn btn-secondary py-0">{{ btn_name }}</button>
+    {% if btn_name == 'EDIT' %}
+      <a href="{% url 'articles:detail' article.pk %}" class="btn btn-outline-dark py-0">BACK</a>
+    {% else %}
+      <a href="{% url 'articles:index' %}" class="btn btn-outline-dark py-0">BACK</a>
+    {% endif %}
+  </form>
+{% endblock content %}

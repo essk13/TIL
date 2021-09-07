@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <hr>
+  <h3 class="mb-3">TITEL : {{ article.title }}</h3>
+  <p class="mb-1">Content</p>
+  <h4>{{ article.content|linebreaks }}</h4>
+  <hr class="mb-1">
+  <p class="mb-1">updated - {{ article.updated_at }}</p>
+  <p class="mb-1">created - {{ article.created_at }}</p>
+  <hr class="mt-1">
+  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <a href="{% url 'articles:update' article.pk %}" class="btn btn-secondary py-0">EDIT</a>
+    <button class="btn btn-secondary py-0">DEL</button>
+    <a href="{% url 'articles:index' %}" class="btn btn-outline-dark py-0">BACK</a>
+  </form>
+{% endblock content %}

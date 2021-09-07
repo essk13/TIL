@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>INDEX</h1>
+  <a href="{% url 'articles:create' %}" class="btn btn-secondary py-0">NEW</a>
+  <hr>
+  {% for article in articles %}
+    <a href="{% url 'articles:detail' article.pk %}" class="text-decoration-none text-dark">
+      <h2>{{ article.title }}</h2>
+    </a>
+    <hr>
+  {% empty %}
+    <h2>There is No Contents</h2>
+  {% endfor %}
+{% endblock content %}
