@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <hr>
+  <h3>TITEL : {{ article.title }}</h3>
+  {% if article.image %}
+    <img src="{{ article.image.url }}" alt="{{ article.image }}" class="w-100">
+  {% endif %}
+  <p class="mb-1">Content :</p>
+  <h4>{{ article.content|linebreaks }}</h4>
+  <p class="mb-1">updated : {{ article.updated_at }}</p>
+  <p>created : {{ article.created_at }}</p>
+  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <a href="{% url 'articles:update' article.pk %}" class="text-decoration-none btn btn-primary py-0">
+    EDIT</a>
+    <button class="btn btn-primary py-0">DELETE</button>
+    <a href="{% url 'articles:index' %}" class="text-decoration-none btn btn-outline-primary py-0">
+    BACK</a>
+  </form>
+{% endblock content %}
