@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="card bg-secondary mt-3">
+    <div class="card-body">
+      <div class="text-white h-100" style="font-family: sandoll-ongothic, sans-serif;">
+        <h2>TITLE : {{ article.title }}</h2>
+        <hr>
+        <p class="mb-1">Content</p>
+        <h4>{{ article.content|linebreaks }}</h4>
+        <img src="{{ article.image.url }}" alt="{{ article.image }}" class="w-100 mb-3">
+        <p class="mb-0">create : {{ article.created_at|date:"Y년 n월 j일 g:i A"}}</p>
+        <p>update : {{ article.updated_at|date:"Y년 n월 j일 g:i A" }}</p>
+        <hr>
+        <form action="{% url 'articles:delete' article.pk %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <a href="{% url 'articles:update' article.pk %}" class="btn btn-dark pb-0 pt-1 mb-3" style="font-family: paralucent, sans-serif;">UPDATE</a>
+          <button class="btn btn-dark pb-0 pt-1 mb-3" style="font-family: paralucent, sans-serif;">DELETE</button>
+          <a href="{% url 'articles:index' %}" class="btn btn-outline-dark pb-0 pt-1 mb-3" style="font-family: paralucent, sans-serif;">BACK</a>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
