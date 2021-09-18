@@ -457,7 +457,7 @@
 
    ```python
    # orm
-   Model.objects.filter(phone__startswith='02%').count()
+   Model.objects.filter(phone__startswith='02').count()
    ```
 
       ```sql
