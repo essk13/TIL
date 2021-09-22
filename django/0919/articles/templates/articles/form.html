@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button>{{ btn_name }}</button>
+    {% if btn_name == '작성' %}
+      <a href="{% url 'articles:index' %}">Back</a>
+    {% else %}
+      <a href="{% url 'articles:detail' article.pk %}">Back</a>
+    {% endif %}
+  </form>
+{% endblock content %}

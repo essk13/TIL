@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Hi, Hello</h1>
+  <hr>
+  {% for article in articles %}
+    <a href="{% url 'articles:detail' article.pk %}"><h3>{{ article.title }}</h3></a>
+    <hr>
+  {% empty %}
+    <h3>No content</h3>
+  {% endfor %}
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button>가입</button>
+    <a href="{% url 'articles:index' %}">뒤로</a>
+  </form>
+{% endblock content %}
