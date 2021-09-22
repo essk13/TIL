@@ -1,0 +1,40 @@
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h3>Hello {{ request.user }}</h3>
+    <form action="{% url 'accounts:logout' %}" method="POST">
+      {% csrf_token %}
+      <a href="{% url 'accounts:signup' %}">JOIN</a>
+      <a href="{% url 'accounts:login' %}">LOGIN</a>
+      <button>LOGOUT</button>
+    </form>
+    <br>
+    <form action="{% url 'accounts:delete' %}" method="POST">
+      {% csrf_token %}
+      <a href="{% url 'accounts:update' %}">UPDATE</a>
+      <button>DELETE</button>
+    </form>
+    <br>
+    <a href="{% url 'articles:index' %}">HOME</a>
+    <a href="{% url 'articles:create' %}">NEW</a>
+    <hr>
+  </div>
+  <div class="container">
+    {% block content %}
+    
+    {% endblock content %}
+  </div>
+  {% bootstrap_javascript %}
+</body>
+</html>
