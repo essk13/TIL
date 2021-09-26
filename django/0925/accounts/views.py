@@ -1,4 +1,3 @@
-from django.contrib import auth
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
@@ -42,7 +41,7 @@ def login(request):
     return render(request, 'accounts/login.html', context)
 
 
-@require_http_methods(['GET', "POST"])
+@require_POST
 def logout(request):
     if request.user.is_authenticated:
         auth_logout(request)

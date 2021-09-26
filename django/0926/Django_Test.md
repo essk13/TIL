@@ -104,7 +104,7 @@ urlpatterns = [
 
 ​		\- include() 함수 호출 및 APP.urls path 등록
 
-​		\- 이미지 업로드 구현 시 추가 설정 필요
+​		**\- 이미지 업로드 구현 시 static 함수 정의 필요**
 
 ```python
 from django.urls import path, include
@@ -420,10 +420,264 @@ def delete(request, pk):
 
 ---
 
-### ※ Authenticate 정리 ※
 
-#### 1) 
+
+### ※ Authentication 정리 ※
+
+\- App 생성 및 URL Mapping 까지 동일
+
+#### 0) views.py 에서 필요한 function, form 호출
+
+```python
+# login, logout 함수명 중복 방지 필수
+from django.contrib.auth import ( login as auth_login,
+                                  logout as auth_logout,
+                                 )
+from django.contrib.auth.forms import ( UserCreationForm,
+                                        AuthenticationForm,
+                                        PasswordChangeForm,
+                                       )
+from .forms import CustomUCF
+```
+
+#### 1) Signup
+
+\- 데코레이터 작성은 자율
+
+**① view 함수**
+
+```python
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect('articles:index')
+    
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:login')
+    else:
+        form = UserCreationForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/signup.html', context)
+```
+
+**② signup.html**
+
+```django
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>가입</button>
+  </form>
+{% endblock content %}
+```
+
+#### 2) Login
+
+\- 데코레이터 작성은 자율
+
+**① view 함수**
+
+**※ 주의 ※**
+
+\- AuthenticationForm은 ModelForm이 아님!!
+
+\- 첫 인자 == request
+
+\- form.save() 사용 불가
+
+```python
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('articles:index')
+    
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            # login 함수명 중복 주의
+            auth_login(request, form.get_user())
+            # next 쿼리스트링 수행여부 설정(선택사항)
+            return redirect(request.GET.get('next') or 'articles:index')
+    else:
+        form = AuthenticationForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/login.html', context)
+```
+
+**② login.html**
+
+```django
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>로그인</button>
+  </form>
+{% endblock content %}
+```
+
+#### 3) Logout
+
+\- 데코레이터 작성은 자율
+
+**① view 함수**
+
+```python
+def logout(request):
+    if request.user.is_authenticated:
+        auth_logout(request)
+    return redirect('articles:index')
+```
+
+#### 4) DELETE (탈퇴)
+
+\- 데코레이터 작성은 자율
+
+**① view 함수**
+
+\- logout 함수 사용 시 순서 주의
+
+```python
+def delete(request):
+    if request.user.is_authenticated:
+        request.user.delete()
+        auth_logout(request)
+    return redirect('articles:index')
+```
+
+#### 5) UPDATE (정보수정)
+
+\- 데코레이터 작성은 자율
+
+**① form**
+
+\- forms.py
+
+\- 기본 UserChangeForm은 권한 외적인 부분까지 수정 가능함으로 커스텀 필요
+
+```python
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class CustomUCF(UserChangeForm):
+
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name']
+```
+
+**② view 함수**
+
+```python
+def chg_user(request):
+    if request.method == 'POST':
+        form = CustomUCF(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('articles:index')
+    else:
+        form = CustomUCF(instance=request.user)
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/chg_user.html', context)
+```
+
+**③ chg_user.html**
+
+```django
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>수정</button>
+  </form>
+{% endblock content %}
+```
+
+#### 6) chg_pw (비밀번호 수정)
+
+\- 데코레이터 작성은 자율
+
+**① view 함수**
+
+```python
+def chg_pw(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:login')
+    else:
+        form = PasswordChangeForm(request.user)
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/chg_pw.html', context)
+```
+
+**② chg_pw.html**
+
+```django
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>수정</button>
+  </form>
+{% endblock content %}
+```
+
+----
+
+
+
+### + Decorator
+
+```python
+from django.views.decorators.http import ( require_POST, # POST 요청만 허용
+                                           require_safe, # GET, HEAD 요청만 허용
+                                           require_http_methods, # 지정 요청만 허용
+                                          )
+from django.contrib.auth.decorators import login_required # 인증 사용자만 허용
+```
+
++) @login_required와 if request.user.is_authenticated: 차이
 
 ```
+@login_required
+ - 인증된 사용자만 기능 사용 가능
+ - 로그인 페이지로 이동
+ - next 파라미터로 다음 행동 지정
+ - login view 함수에서 next 쿼리스트링 행동 수행 가능하도록 정의 필요
+if request.user.is_authenticated:
+ - 인증된 사용자만 기능 사용 가능
+ - 부가 조건을 통해서 미인증 사용자 접근시 행동 정의 필요
 ```
+
+----
+
+
+
+### + Template / form 변수
+
+**\- .as_p()**
+
+​	· `<p>` 각 field `</p>`
+
+**\- .as_ul()**
+
+​	· `<li>` 각 field `</li>`
+
+**\- .as_table()**
+
+​	· `<tr>` 각 field `</tr>`
 
