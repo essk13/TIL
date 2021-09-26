@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h3>제목 : {{ article.title }}</h3>
+  <hr>
+  <p>내용</p>
+  {% if article.img %}
+    <img src="{{ article.img.url }}" alt="{{ article.title }} image">
+  {% endif %}
+  <p>{{ article.context|linebreaks }}</p>
+  <form action="{% url 'articles:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <button><a href="{% url 'articles:update' article.pk %}">수정</a></button>
+    <button>삭제</button>
+  </form>
+{% endblock content %}
