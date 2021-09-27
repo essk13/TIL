@@ -45,14 +45,14 @@ $ python manage.py runserver (주소로 이동하여 로켓 확인 / 종료 = ct
 #### 6) 애플리케이션 생성
 
 ```
-$ python manage.py startapp article(APP명)
+$ python manage.py startapp articles(APP명)
 ```
 
 #### 7) settings.py / INSTALLED_APPS에 APP 추가
 
 ```python
 INSTALLED_APPS = [
-	'article(APP명)',
+	'articles(APP명)',
 ]
 ```
 
@@ -70,7 +70,7 @@ TEMPLATES = [
 ]
 ##############################################
 STATIC_URL = '/static/'
-STATIC_FILES = [BASE_DIR / 'static']
+STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 ```
@@ -282,7 +282,7 @@ def create(request):
 
 **② form.html**
 
-\- CREAT, UPDATE 공유
+\- CREATE, UPDATE 공유
 
 ```django
 {% block content %}
@@ -403,7 +403,7 @@ def delete(request, pk):
   **⑤ settings.py PJT 공통 static 경로 설정**
 
   ```python
-  STATICFILE_DIRS = [BASE_DIR / 'static']
+  STATICFILES_DIRS = [BASE_DIR / 'static']
   ```
 
   **⑥ 배포를 위한 settings.py 설정** (설정 후 ⑦번 필수 수행)
