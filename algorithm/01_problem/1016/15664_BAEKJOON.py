@@ -1,0 +1,25 @@
+def per(lv, st):
+    global ans
+    if lv == M:
+        ans.append(tuple(p))
+        return
+    for i in range(st, N):
+        if u[i]:
+            u[i] = 0
+            p[lv] = n[i]
+            per(lv+1, i)
+            u[i] = 1
+
+
+N, M = map(int, input().split())
+n = list(map(int, input().split()))
+n.sort()
+p = [0] * M
+u = [1] * N
+ans = []
+per(0, 0)
+ans = set(ans)
+ans = list(ans)
+ans.sort()
+for i in range(len(ans)):
+    print(*ans[i])
