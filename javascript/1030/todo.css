@@ -88,6 +88,6 @@ li:hover {
 }
 
 .done {
-  background: #51DF70;
+  background: #51DF70 !important;
   color: #00891E;
 }
