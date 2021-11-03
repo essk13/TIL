@@ -280,3 +280,153 @@
     }
     ```
 
+
+
+----
+
+### 함수 (Functions)
+
+- 참조 타입 중 하나 (function type)
+
+- **일급 객체**
+
+- 정의 방법
+
+  - **함수 선언식 (function declaration)**
+
+  - **함수 표현식 (function expression)**
+
+    <img src="javascript_grammar.assets/funtion.JPG" alt="funtion" style="zoom:50%;" />
+
+
+
+- **함수 선언식 (function statement, declaration)**
+
+  - 함수의 이름과 함께 정의하는 방식
+  - **함수명(name), 매개변수(args), 내용{ }**
+
+  ```javascript
+  function name(args) {
+      // content
+  }
+  ```
+
+- **함수 표현식 (function expression)**
+
+  - 함수를 표현식 내부에서 정의하는 방식
+  - 함수명을 생략하고 **익명함수**로 정의 가능
+  - **함수명(생략가능), 매개변수, 내용**
+
+  ```javascript
+  // 정의
+  const myFunc = function (args) {
+      // content
+  }
+  
+  // 예시
+  const add = function (num1, num2) {
+      return num1 + num2
+  }
+  
+  const result = add(1, 2)
+  console.log(result)
+  ```
+
+
+
+- **기본인자 (default arguments)**
+  - 인자 작성 시 '=' 문자 뒤 기본 인자 선언 가능
+
+- **호이스팅(hoisting)**
+  - 함수 선언식으로 선언한 함수는 hoisting 발생
+  - 호출 후 선언해도 동작
+
+
+
+- **화살표 함수 (Arrow Function)**
+
+  - 함수를 간결하게 정의할 수 있는 문법
+
+    ```
+    1) function 키워드 생략
+    2) 매개변수가 하나라면 () 생략 가능
+    3) 표현식이 하나라면 {}, return 생략 가능
+    ```
+
+  ```javascript
+  // 기존
+  const arrow = function (args) {
+      return 'result'
+  }
+  
+  // 1단계
+  const arrow = (args) => {
+      return 'result'
+  }
+  
+  // 2단계
+  const arrow = args => {
+      return 'result'
+  }
+  
+  // 3단계
+  const arrow = args => 'result'
+  ```
+
+
+
+---
+
+### 배열과 객체 (Arrays & Objects)
+
+- **배열 (Array)**
+
+  - 키와 속성들을 담고 있는 참조 타입의 객체(object)
+
+  - 순서 보장
+
+  - 주로 대괄호를 이용해 생성, 인덱스로 값 접근 가능
+
+    
+
+  - **배열 메서드I (methods)**
+
+    <img src="javascript_grammar.assets/array.JPG" alt="array" style="zoom:50%;" />
+
+    ```javascript
+    const numbers = [1, 2, 3]
+    
+    // reverse - 배열 요소를 반대로 정렬
+    numbers.reverse() // 3, 2, 1
+    
+    // push & pop -배열 마지막에 요소 추가 / 요소 제거
+    numbers.push(4) // 3, 2, 1, 4
+    numbers.pop() // 3, 2, 1
+    
+    // unshift & shift - 배열의 첫번째 요소 추가 / 요소 제거
+    numbers.unshift(4) // 4, 3, 2, 1
+    numbers.shift() // 3, 2, 1
+    
+    // includes - 특정 값 존재여부 판별 >> 참, 거짓 반환
+    numbers.includes(1) // true
+    
+    // indexOf - 특정 값 존재여부 판별 >> 일치하는 첫 번째 요소 인덱스 또는 -1 반환
+    numbers.indexOf(4) // -1
+    
+    // join - 모든 요소를 연결하여 반환 / separator 생략 === ','
+    ret = numbers.join() // 3,2,1
+    ret2 = numbers.join('') // 321
+    ret3 = numbers.join(' ') // 3 2 1
+    ```
+
+    
+
+  - **배열 메서드II (methods)**
+
+    <img src="javascript_grammar.assets/array2.JPG" alt="array2" style="zoom:50%;" />
+
+    ```javascript
+    ```
+
+    
+
