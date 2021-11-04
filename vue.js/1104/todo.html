@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+  <div class="main">
+    <h1>TODO-List</h1>
+    <h4>※ 사용방법 ※</h4>
+    <p>Todo 작성: 내용 작성 후 '<i class="fas fa-pen"></i>' 버튼</p>
+    <p>조회: 전체, 진행중, 완료 항목 선택</p>
+    <p>저장: Auto-save</p>
+    <p>항목삭제: '완료 항목 삭제' 버튼</p>
+    <p>초기화: '초기화' 버튼</p>
+    <hr>
+
+    <div id="app">
+      <select v-model="status">
+        <option value="all">전체</option>
+        <option value="complete">완료</option>
+        <option value="progress">진행중</option>
+      </select>
+
+      <input v-model="input" type="text">
+      <button @click="addTodo"><i class="fas fa-pen"></i></button>
+
+      <hr>
+
+      <ul>
+        <li v-for="todo in todoListStatus" :key="todo.key">
+          <input type="checkbox" v-model="todo.isComplete">
+          <span :class="{ complete: todo.isComplete}">{{ todo.content }}</span>
+        </li>
+      </ul>
+
+      <button @click="removeComplete">완료 항목 삭제</button>
+      <button @click="reset">초기화</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="todo.js"></script>
+</body>
+</html>

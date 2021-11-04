@@ -397,36 +397,184 @@
     const numbers = [1, 2, 3]
     
     // reverse - 배열 요소를 반대로 정렬
-    numbers.reverse() // 3, 2, 1
+    numbers.reverse() // [3, 2, 1]
+    
     
     // push & pop -배열 마지막에 요소 추가 / 요소 제거
-    numbers.push(4) // 3, 2, 1, 4
-    numbers.pop() // 3, 2, 1
+    numbers.push(4) // [3, 2, 1, 4]
+    numbers.pop() // [3, 2, 1]
+    
     
     // unshift & shift - 배열의 첫번째 요소 추가 / 요소 제거
-    numbers.unshift(4) // 4, 3, 2, 1
-    numbers.shift() // 3, 2, 1
+    numbers.unshift(4) // [4, 3, 2, 1]
+    numbers.shift() // [3, 2, 1]
+    
     
     // includes - 특정 값 존재여부 판별 >> 참, 거짓 반환
     numbers.includes(1) // true
     
+    
     // indexOf - 특정 값 존재여부 판별 >> 일치하는 첫 번째 요소 인덱스 또는 -1 반환
     numbers.indexOf(4) // -1
+    
     
     // join - 모든 요소를 연결하여 반환 / separator 생략 === ','
     ret = numbers.join() // 3,2,1
     ret2 = numbers.join('') // 321
     ret3 = numbers.join(' ') // 3 2 1
     ```
-
+  
     
-
+  
   - **배열 메서드II (methods)**
 
     <img src="javascript_grammar.assets/array2.JPG" alt="array2" style="zoom:50%;" />
-
+  
     ```javascript
-    ```
-
+    const nums = [1, 2, 3]
     
+    // forEach - 각 요소에 대해 콜백 함수를 한 번씩 실행
+    // 콜백 함수 매개변수 >> element(요소)[, index(인덱스)[, array(배열)]
+    nums.forEach((num, index) => console.log(num*2, index))
+    // 2, 0 // 4, 1 // 6, 2
+    
+    
+    // map - 각 요소에 대해 콜백 함수를 한 번씩 실행
+    // 	 >> 콜백 함수의 반환 값을 요소로 하는 새 배열 반환
+    const doubleNums = nums.map(num => num * 2) // [2, 4, 6]
+    
+    
+    // filter - 각 요소에 대해 콜백 함수를 한 번씩 실행
+    // 	 >> 콜백 함수의 반환 값이 참인 요소들을 모아 새 배열 반환
+    const oddNums = nums.filter(num => num % 2) // [1, 3]
+    
+    
+    // find - 각 요소에 대해 콜백 함수를 한 번씩 실행
+    //   >> 찾는 값이 있으면 해당 요소 반환 / 없으면 undefined 반환
+    const ret = nums.find(num => num === 1) // 1
+    const ret = nums.find(num => num === 10) // undefined
+    
+    
+    // some - 각 요소에 대해 콜백 함수를 한 번씩 실행
+    //   >> 요소 중 하나라도 콜백 함수 결과 참을 반환하면 참 반환 / 빈 배열은 거짓
+    const hasEvenNum = nums.some(num => num % 2 === 0) // true
+    
+    
+    // every - 각 요소에 대해 콜백 함수를 한 번씩 실행
+    //   >> 요소 중 하나라도 콜백 함수 결과 거짓을 반환하면 거짓 반환 / 빈 배열은 참
+    const isOddNums = nums.every(num => num % 2) // false
+    
+    
+    // reduce - 각 요소에 대해 콜백 함수를 한 번씩 실행
+    //   >> 콜백 함수의 반환 값을 하나의 값(acc)에 누적 후 반환
+    // 매개변수 >> acc(누적값), initialValue(optional) 초기 acc 값
+    const result = nums.reduce((acc, num) => {acc + num} , 0) // 6
+    ```
+    
+  - 배열 순회 방법
+  
+    <img src="javascript_grammar.assets/array3.JPG" alt="array3" style="zoom: 67%;" />
+
+
+
+- **객체 (Objects)**
+
+  - 속성(property)의 집합 / **key : value** 쌍으로 표현
+
+  - key >> 문자열 / value >> 모든 타입
+
+  - '.' 또는 []로 접근가능
+
+  - **ES6 문법**
+
+    - **1) 속성명 축약 (shorthand)**
+
+      ​	\- 객체 정의 시 key와 할당하는 변수 명이 동일한 경우 축약 가능
+
+      ```javascript
+      let books = ['book 1', 'book 2']
+      let magazines = null
+      
+      // ES5
+      var bookShop = {
+          books: books,
+          magazines: magazines,
+      }
+      
+      // ES6 - key와 변수명 동일 >> 축약 가능
+      const bookShop = {
+          books,
+          magazines,
+      }
+      ```
+
+    - **2) 메서드명 축양 (shorthand)**
+
+      ​	\- 메서드 선언 시 function 키워드 생략 가능
+
+      ```javascript
+      // ES5
+      var obj = {
+          greeting: function () {
+              console.log('Hi')
+          }
+      }
+      
+      // ES6
+      const obj = {
+          greeting() {
+              console.log('Hi')
+          }
+      }
+      ```
+
+    - **3) 계산된 속성 (computed property name)**
+
+      ​	\- key 명을 표현식을 이용하여 동적으로 생성 가능
+
+      ```javascript
+      const key = 'regions'
+      const value = ['서울', '인천', '대전', '대구', '부산', '광주', '울산']
+      
+      const city = {
+          [key]: value,
+      }
+      ```
+
+    - **4) 구조 분해 할당 (destructing assignment)**
+
+      ​	\- 배열 또는 객체를 분해하여 속성을 변수에 할당하는 문법
+
+      ```javascript
+      const userInformation = {
+          name: 'LEE',
+          userId: 'user123',
+          phoneNum: '010-XXX-XXX',
+          email: 'user123@email.net'
+      }
+      
+      const { name } = userInformation
+      const { userId } = userInformation
+      const { phoneNum } = userInformation
+      const { email } = userInformation
+      
+      // 여러 항목 가능
+      const { name, userId } = userInformation
+      ```
+
+    - **JSON (JavaScript Object Notation)**
+
+      ```markdown
+      - key-value쌍의 형태 >> 데이터를 표기하는 언어 독립적 표준 포맷
+      - JavaScript Object 형태의 문자열 (Object X)
+      
+      # method
+      1) JSON.parse()
+      	JSON >> JavaScript Object
+      
+      2) JSON.stringify()
+      	JavaScript Object >> JSON
+      ```
+
+      
 
