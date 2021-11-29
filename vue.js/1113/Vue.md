@@ -238,13 +238,14 @@
     ```javascript
     const app = new Vue({
       filters: {
-        filter: function (data) {
+        filter1: function (data) {
           return value
         },
+        ...
       }
     })
     
-    {{ data | filter }}
+    {{ data | filter1 | filter2 }}
     ```
 
 
