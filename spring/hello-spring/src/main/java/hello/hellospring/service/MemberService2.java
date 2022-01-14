@@ -2,22 +2,20 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
 /**
- * Component Scan
+ * Java Code Spring Bean
  */
-@Service // with Service, Repository [Component scan]
-public class MemberService {
+public class MemberService2 {
 
     private final MemberRepository memberRepository;
 
-    @Autowired
-    public MemberService(MemberRepository memberRepository) {
+    // (DI) 생성자 주입
+    public MemberService2(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
