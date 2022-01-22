@@ -1,54 +1,23 @@
 import sys, heapq
 input = sys.stdin.readline
-'''
-Fail 재풀이 예정
-'''
 
-def dijkstra():
+
+def dijkstra(st):
     visited = [21e8] * (n + 1)
-    visited[s] = 0
-    min_ = []
-    for d, c in adj[s]:
-        if visited[d] == 0: continue
+    visited[st] = 0
+    heap = []
+    for d, c in adj[st]:
         visited[d] = c
-
-        if s == g or d == g:
-            heapq.heappush(min_, (c, d, 1, 0))
-        elif s == h or d == h:
-            heapq.heappush(min_, (c, d, 0, 1))
-        elif (s == g and d == h) or (s == h and d == g):
-            heapq.heappush(min_, (c, d, 1, 1))
-        else:
-            heapq.heappush(min_, (c, d, 0, 0))
-
-    can = [0] * (n + 1)
-    while min_:
-        dist, now, pg, ph = heapq.heappop(min_)
-        if now in destination:
-            if (pg, ph) == (1, 1):
-                can[now] = 1
-            else:
-                can[now] = 0
-
+        heapq.heappush(heap, (c, d))
+    while heap:
+        dist, now = heapq.heappop(heap)
         for d, c in adj[now]:
-            nc = c + dist
+            nc = dist + c
             if visited[d] <= nc: continue
+
             visited[d] = nc
-
-            if d == g:
-                heapq.heappush(min_, (nc, d, 1, ph))
-            elif d == h:
-                heapq.heappush(min_, (nc, d, pg, 1))
-            else:
-                heapq.heappush(min_, (nc, d, pg, ph))
-
-    res = []
-    for d in destination:
-        if visited[d] < 21e8 and can[d] == 1:
-            res.append(d)
-
-    res.sort()
-    return res
+            heapq.heappush(heap, (nc, d))
+    return visited
 
 
 for tc in range(int(input())):
@@ -65,5 +34,24 @@ for tc in range(int(input())):
     for _ in range(t):
         destination.append(int(input().strip()))
 
-    ans = dijkstra()
+    ans = []
+    # s에서 출발한 모든 지점의 최단거리
+    S = dijkstra(s)
+    # g에서 출발한 모든 지점의 최단거리
+    G = dijkstra(g)
+    # h에서 출발한 모든 지점의 최단거리
+    H = dijkstra(h)
+
+    for de in destination:
+        '''
+        1) s에서 목적지 de까지의 최단거리
+        2) s에서 경유지 g까지의 최단거리 + g에서 h 거리 + 경유지 h에서 목적지 de까지의 최단거리
+        3) s에서 경유지 h까지의 최단거리 + h에서 g 거리 + 경유지 g에서 목적지 de까지의 최단거리
+        
+        1번이 2번 또는 3번과 같다면 이동 가능한 목적지
+        '''
+        if S[de] in (G[s] + G[h] + H[de], H[s] + H[g] + G[de]):
+            ans.append(de)
+
+    ans.sort()
     print(' '.join(map(str, ans)))
