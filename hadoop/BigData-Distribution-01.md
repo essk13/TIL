@@ -226,7 +226,7 @@
   - Driver.java 파일이 수정되면 반드시 ant 다시 수행
 
     ```markdown
-    e.g.) hadoop jar ssafy.jar wordcount *[입력 받을 폴더]*wordcount_test *[결과 저장 폴더]*wordcount_test_out
+    e.g.) hadoop jar {pjt-name}.jar wordcount *[입력 받을 폴더]*wordcount_test *[결과 저장 폴더]*wordcount_test_out
     ```
 
   
@@ -279,7 +279,7 @@
 
      ```bash
      $ cd /home/{username}/Project/
-     $ hadoop jar ssafy.jar wordcount wordcount_test wordcount_test_out
+     $ hadoop jar {pjt-name}.jar wordcount wordcount_test wordcount_test_out
      
      *Hadoop 실행 방법*
      - $ hadoop jar [jar-file] [program-name] <input-arguments...>
