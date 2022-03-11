@@ -1,63 +1,60 @@
 import sys
 sys.stdin = open('input.txt')
 '''
-FAIL
+PASS
 '''
-
-
-def nxt(row):
-    nn = row + 1
-    while nn <= n - 1:
-        if ans[nn]:
-            return nn
-        nn += 1
-
-    nn = row - 1
-    while nn >= 0:
-        if ans[nn]:
-            return nn
-        nn -= 1
 
 
 n, k = map(int, input().split())
 cmd = list(input().split(','))
 
-ans = [1] * n
-delete = []
-
 now = k
+table = {i: [i - 1, i + 1] for i in range(n)}
+table[0] = [None, 1]
+table[n-1] = [n - 2, None]
+ans = ['O'] * n
+delete = []
 for c in cmd:
-    if len(c) == 1:
-        # Remove
-        if c == 'C':
-            delete.append(now)
-            ans[now] = 0
-            now = nxt(now)
-        # Undo
-        elif c == 'Z':
-            pre = delete.pop()
-            ans[pre] = 1
+    if c == 'C':
+        ans[now] = 'X'
+        delete.append(now)
+        pre, nxt = table[now]
+        if nxt == None:
+            now = pre
+        else:
+            now = nxt
+
+        if pre == None:
+            table[nxt][0] = pre
+        elif nxt == None:
+            table[pre][1] = nxt
+        else:
+            table[pre][1] = nxt
+            table[nxt][0] = pre
+
+    elif c == 'Z':
+        re = delete.pop()
+        pre, nxt = table[re]
+        ans[re] = 'O'
+        if pre == None:
+            table[nxt][0] = re
+        elif nxt == None:
+            table[pre][1] = re
+        else:
+            table[pre][1] = re
+            table[nxt][0] = re
 
     else:
-        # Up
-        if c[0] == 'U':
-            cnt = 0
-            m = now - int(c[2])
-            while sum(ans[m:now]) < int(c[2]):
-                m -= 1
-            now = m
-        # Down
-        elif c[0] == 'D':
-            cnt = 0
-            m = now + int(c[2])
-            while sum(ans[now+1:m+1]) < int(c[2]):
-                m += 1
-            now = m
+        c1, c2 = c[0], int(c[2])
+        print(c[0], end='\n')
+        print(c[1], end='\n')
+        print(c[2])
+        if c1 == 'D':
+            to = 1
+        else:
+            to = 0
 
-answer = ''
-for a in ans:
-    if a:
-        answer += 'O'
-    else:
-        answer += 'X'
-print(answer)
+        for _ in range(c2):
+            now = table[now][to]
+
+print(''.join(ans))
