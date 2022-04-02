@@ -1,8 +1,8 @@
-## ![g1.png](C:\Users\sksms\Desktop\SSAFY\TIL\algorithm\01_problem\python\2022\BAEKJOON\BAEKJOON_13460\readme.assets\g1.png) [BAEKJOON 13460 구슬 탈출 2](https://www.acmicpc.net/problem/13460) (Python)
+## [BAEKJOON 13460 구슬 탈출 2](https://www.acmicpc.net/problem/13460) ![g1](readme.assets/g1.png)  (Python)
 
 #### 입출력 / 제한
 
-![입출력.PNG](C:\Users\sksms\Desktop\SSAFY\TIL\algorithm\01_problem\python\2022\BAEKJOON\BAEKJOON_13460\readme.assets\입출력.PNG)
+![입출력.PNG](readme.assets/입출력.PNG)
 
 
 
