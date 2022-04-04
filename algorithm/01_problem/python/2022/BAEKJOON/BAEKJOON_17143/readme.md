@@ -1,4 +1,4 @@
-## [BAEKJOON 17143 낚시왕](https://www.acmicpc.net/problem/13460) ![g2.png](C:\Users\sksms\Desktop\SSAFY\TIL\algorithm\01_problem\python\2022\BAEKJOON\BAEKJOON_17143\readme.assets\g2.png) (Python)
+## [BAEKJOON 17143 낚시왕](https://www.acmicpc.net/problem/13460) ![g2.png](readme.assets/g2.png) (Python)
 
 #### 입출력 / 제한
 
