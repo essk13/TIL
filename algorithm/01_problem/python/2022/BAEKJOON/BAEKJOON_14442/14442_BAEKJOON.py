@@ -1,35 +1,36 @@
-import sys, heapq
+import sys
+from collections import deque
 input = sys.stdin.readline
 dr = [-1, 1, 0, 0]
 dc = [0, 0, -1, 1]
 
 
 def move():
-    q = [(1, -K, 0, 0)]
+    q = deque([(0, 0, 1, K)])
     while q:
-        i, j, c, k = heapq.heappop(q)
+        i, j, c, k = q.popleft()
         if (i, j) == (N-1, M-1):
             return c
         for d in range(4):
             nr, nc = i + dr[d], j + dc[d]
             if nr < 0 or nr >= N or nc < 0 or nc >= M:
                 continue
-            if visited[nr][nc]:
-                continue
+            if not visited[k][nr][nc]:
+                if MAP[nr][nc] == '0':
+                    visited[k][nr][nc] = 1
+                    q.append((nr, nc, c + 1, k))
 
-            if MAP[nr][nc] == '1' and k < 0:
-                visited[nr][nc] = c + 1
-                heapq.heappush(q, (c + 1, k + 1, nr, nc))
-            elif MAP[nr][nc] == '0':
-                visited[nr][nc] = c + 1
-                heapq.heappush(q, (c + 1, k, nr, nc))
+            if not visited[k-1][nr][nc]:
+                if MAP[nr][nc] == '1' and k > 0:
+                    visited[k-1][nr][nc] = 1
+                    q.append((nr, nc, c + 1, k - 1))
     return -1
 
 
 N, M, K = map(int, input().split())
 MAP = [input().strip() for _ in range(N)]
 
-visited = [[0] * M for _ in range(N)]
-visited[0][0] = 1
+visited = [[[0] * M for _ in range(N)] for _ in range(K+1)]
+visited[0][0][0] = 1
 
 print(move())
