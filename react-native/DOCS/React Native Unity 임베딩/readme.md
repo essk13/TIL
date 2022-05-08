@@ -10,9 +10,11 @@
 > 
 > plugin : [@azesmway/react-native-unity](https://github.com/azesmway/react-native-unity)
 
+
+
 ### Installation
 
-> 본 문서는 RN 프로젝트가 생성되어있다는 전제하에 진행됩니다.
+> 본 문서는 RN 프로젝트가 생성되어있다는 전제하에 작성되었다.
 
 - **@azesmway/react-native-unity 라이브러리 설치**
   
@@ -54,49 +56,7 @@
    
    - ARM64: 체크
 
-4. **OnEvent Code**
-   
-   > Unity 프로젝트 내 C# Script
-   > 
-   > 내 경우 버튼 생성 후 해당 버튼에 적용하였다.
-   
-   ```csharp
-   using System;
-   using System.Collections;
-   using System.Collections.Generic;
-   using System.Runtime.InteropServices;
-   using UnityEngine.UI;
-   using UnityEngine;
-   
-   public class NativeAPI {
-   #if UNITY_IOS && !UNITY_EDITOR
-     [DllImport("__Internal")]
-     public static extern void sendMessageToMobileApp(string message);
-   #endif
-   }
-   
-   public class ButtonBehavior : MonoBehaviour
-   {
-     public void ButtonPressed()
-     {
-       if (Application.platform == RuntimePlatform.Android)
-       {
-         using (AndroidJavaClass jc = new AndroidJavaClass("com.azesmwayreactnativeunity.ReactNativeUnityViewManager"))
-         {
-           jc.CallStatic("sendMessageToMobileApp", "The button has been tapped!");
-         }
-       }
-       else if (Application.platform == RuntimePlatform.IPhonePlayer)
-       {
-   #if UNITY_IOS && !UNITY_EDITOR
-         NativeAPI.sendMessageToMobileApp("The button has been tapped!");
-   #endif
-       }
-     }
-   }
-   ```
-
-5. **Export**
+4. **Export**
    
    > File → Build Setting → Build
 
@@ -117,8 +77,8 @@
    - unity/builds/android 의 local.properties 파일 android 디렉토리에 **복사**
    
    - unity/builds/android/unityLibrary/libs 하위 파일 android/app/libs로 **복사**
-     
-      
+
+
 
 ### Build Settings
 
@@ -270,7 +230,7 @@
        methodName: 'methodName',
        message: 'message',
      };
-   
+     // RN to Unity Message
      useEffect(() => {
        setTimeout(() => {
          if (unityRef && unityRef.current) {
@@ -297,6 +257,116 @@
    }
    
    export default Unity;
+   ```
+
+
+
+### RN 과 Unity 소통
+
+1. **Unity to RN**
+   아래 스크립트 생성 후 {보낼 메시지}에 원하는 내용 전달
+   
+   ```csharp
+   // Unity에서 메시지 전달
+   using System;
+   using System.Collections;
+   using System.Collections.Generic;
+   using System.Runtime.InteropServices;
+   using UnityEngine.UI;
+   using UnityEngine;
+   
+   public class NativeAPI {
+   #if UNITY_IOS && !UNITY_EDITOR
+     [DllImport("__Internal")]
+     public static extern void sendMessageToMobileApp(string message);
+   #endif
+   }
+   
+   public class ButtonBehavior : MonoBehaviour
+   {
+     public void ButtonPressed()
+     {
+       if (Application.platform == RuntimePlatform.Android)
+       {
+         using (AndroidJavaClass jc = new AndroidJavaClass("com.azesmwayreactnativeunity.ReactNativeUnityViewManager"))
+         {
+           jc.CallStatic("sendMessageToMobileApp", "{보낼 메시지}");
+         }
+       }
+       else if (Application.platform == RuntimePlatform.IPhonePlayer)
+       {
+         #if UNITY_IOS && !UNITY_EDITOR
+           NativeAPI.sendMessageToMobileApp("The button has been tapped!");
+         #endif
+       }
+     }
+   }
+   ```
+   
+   ```js
+   // RN에서 메시지 수신
+   <UnityView
+     ref={unityRef}
+     style={{flex: 1}}
+     // 메시지 수신 위치
+     onUnityMessage={result =>
+       console.log('onUnityMessage', result.nativeEvent.message)
+     }
+   />
+   ```
+
+2. **RN to Unity**
+   
+   아래 코드를 통해 메시지 전달
+   
+   > 'gameObject': 전달 받을 오브젝트 명칭
+   > 
+   > 'methodName': 전달 받을 스크립트 내 메서드 명칭
+   > 
+   > 'message': 보낼 메시지
+   
+   ```js
+   // React Native에서 메시지 전송
+   interface IMessage {
+     gameObject: string;
+     methodName: string;
+     message: string;
+   }
+   
+   function Unity() {
+     const unityRef = useRef();
+     const message: IMessage = {
+       gameObject: 'GameObject',
+       methodName: 'RNScript',
+       message: 'message',
+     };
+     // RN to Unity Message
+     useEffect(() => {
+       setTimeout(() => {
+         if (unityRef && unityRef.current) {
+           unityRef.current.postMessage(
+             message.gameObject,
+             message.methodName,
+             message.message,
+           );
+         }
+       }, 6000);
+     }, []);
+   ```
+   
+   ```csharp
+   // Unity에서 메시지 수신
+   using System.Collections;
+   using System.Collections.Generic;
+   using UnityEngine;
+   
+   public class RNScript : MonoBehaviour
+   {
+       public void MessageRN(string message)
+       {
+           print("UNITY Recived message: " + message);
+       }
+   }
    ```
 
 
