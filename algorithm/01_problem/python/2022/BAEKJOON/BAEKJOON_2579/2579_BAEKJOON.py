@@ -1,35 +1,20 @@
 import sys
-from collections import deque
 input = sys.stdin.readline
 
 n = int(input())
-stair = [0] * (n + 1)
-for i in range(1, n + 1):
+stair = [0] * n
+dp = [0] * n
+for i in range(n):
     stair[i] = int(input())
 
-ans = 0
-visited = [0] * (n + 1)
-q = deque([(0, 0, 0)])
-while q:
-    now, cont, score = q.popleft()
-    if now == n:
-        ans = max(ans, score)
-        continue
+# 각 계단의 위치에 도착했을 때 가능한 최고 점수 저장
+dp[0] = stair[0]
+if n > 1:
+    dp[1] = stair[0] + stair[1]
+if n > 2:
+    dp[2] = max(stair[0] + stair[2], stair[1] + stair[2])
 
-    for j in range(1, 3):
-        nxt = now + j
-        if nxt > n:
-            continue
+for j in range(3, n):
+    dp[j] = max(dp[j-3] + stair[j-1] + stair[j], dp[j-2] + stair[j])
 
-        ns = score + stair[nxt]
-        if ns <= visited[nxt]:
-            continue
-
-        if j == 1:
-            if cont >= 2:
-                continue
-            q.append((nxt, cont + 1, ns))
-        else:
-            q.append((nxt, 1, ns))
-
-print(ans)
+print(dp[n-1])
