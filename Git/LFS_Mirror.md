@@ -24,7 +24,7 @@
 
 ### 2️⃣ 100MB가 넘는 파일을 지닌 Repository Mirroring
 
-- Github는 각 파일의 상한선이 100MB로 이를 넘어서는 용량의 파일은 업로드 시 에러가 발생한다. 이를 해결하기 위해서 LFS(Large File Storage)를 통해 대용량 파일을 관리할 수 있다. LFS는 사이트에서 설치하거나 Git bahs 창에서 설치할 수 있다.
+- Github는 각 파일의 상한선이 100MB로 이를 넘어서는 용량의 파일은 업로드 시 에러가 발생한다. 이를 해결하기 위해서 LFS(Large File Storage)를 통해 대용량 파일을 관리할 수 있다. LFS는 사이트에서 설치하거나 Git bash 창에서 설치할 수 있다.
   
   - [LFS 다운로드](https://git-lfs.github.com/)
   
